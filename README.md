@@ -3,13 +3,21 @@
 Clean modular architecture with role-based auth, 11-section sequential workflow, file uploads, and audit history.
 
 ## Stack
-- **Backend**: Django 5 + Django REST Framework + SimpleJWT + SQLite3 + Pillow
+- **Backend**: Django 6 + Django REST Framework + SimpleJWT + SQLite3 + Pillow
 - **Frontend**: React (Vite) + react-router-dom + axios
 - **DB**: SQLite (`db.sqlite3`), media in `media/uploads/`
 
 ## Roles
 - `ADMIN` | `STUDENT` | `VERIFIER` | `STAFF_ADVISOR` | `HOD` | `PRINCIPAL`
 - JWT auth (access 12h, refresh 7d). Passwords hashed via Django.
+
+## Environment & Secrets
+All secrets and environment-specific values are externalized to `.env` files (git-ignored).
+- `backend/.env` — Django `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS`, `CORS_ALLOW_ALL_ORIGINS` (template: `backend/.env.example`).
+- `frontend/.env` — `VITE_API_BASE_URL` (template: `frontend/.env.example`).
+
+Python dependencies are managed inside `backend/.venv`. See [`docs/SETUP.md`](docs/SETUP.md) for full instructions
+and [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the project layout.
 
 ## Project Structure (reorganized, functions unchanged)
 ```
@@ -32,8 +40,12 @@ no_due/
 
 ### Backend
 ```bash
-cd "D:\web projects\no_due\backend"
-pip install -r requirements.txt  # Django, djangorestframework, django-cors-headers, Pillow, djangorestframework-simplejwt
+cd backend
+python -m venv .venv
+# Windows :  .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt   # Django, djangorestframework, django-cors-headers, Pillow, djangorestframework-simplejwt, python-decouple
+cp .env.example .env             # then set a strong SECRET_KEY in .env
 python manage.py migrate
 python manage.py shell -c "from django.contrib.auth import get_user_model; User=get_user_model(); User.objects.create_superuser('admin','admin@example.com','admin123',role='ADMIN') if not User.objects.filter(username='admin').exists() else print('exists')"
 python manage.py runserver
