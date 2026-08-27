@@ -1,0 +1,31 @@
+/* App shell – kept minimal, global layout helpers */
+#root{ min-height:100vh; display:flex; flex-direction:column }
+main{ flex:1 }
+
+/* Subtle page background pattern */
+body::before{
+  content:'';
+  position:fixed; inset:0;
+  background:
+    linear-gradient(transparent 0 1px, transparent 1px),
+    radial-gradient(circle at 1px 1px, rgba(15,23,42,.04) 1px, transparent 0);
+  background-size: 100% 32px, 24px 24px;
+  pointer-events:none;
+  opacity:.5;
+  z-index:-1;
+}
+
+/* Legacy hero kept for Home page – polished */
+.hero{ position:relative; display:flex; align-items:center; justify-content:center; padding:24px }
+.hero .base{ width:160px; filter: drop-shadow(0 10px 20px rgba(37,99,235,.15)) }
+#center{ display:flex; flex-direction:column; gap:24px; place-content:center; place-items:center; flex-grow:1; padding:32px 20px }
+#next-steps{ display:flex; border-top:1px solid var(--border); text-align:left; border-radius:0 0 var(--radius) var(--radius); overflow:hidden }
+#next-steps > div{ flex:1 1 0; padding:28px; background:#fff }
+#next-steps ul{ list-style:none; padding:0; display:flex; gap:8px; margin:24px 0 0; flex-wrap:wrap }
+#next-steps a{ border:1px solid var(--border); background:var(--bg-soft) }
+#docs{ border-right:1px solid var(--border) }
+@media (max-width: 1024px){
+  #next-steps{ flex-direction:column; text-align:center }
+  #docs{ border-right:none; border-bottom:1px solid var(--border) }
+  #center{ padding:24px 16px; gap:16px }
+}

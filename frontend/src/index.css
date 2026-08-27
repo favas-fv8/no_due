@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
+
+:root{
+  --bg: #f8fafc;
+  --bg-soft: #f1f5f9;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --border-strong:#cbd5e1;
+  --text: #0f172a;
+  --text-muted:#475569;
+  --text-faint:#94a3b8;
+  --primary:#2563eb;
+  --primary-hover:#1d4ed8;
+  --primary-soft:#eff6ff;
+  --primary-ring:#bfdbfe;
+  --success:#16a34a;
+  --success-soft:#dcfce7;
+  --warning:#d97706;
+  --danger:#ef4444;
+  --radius:14px;
+  --radius-sm:10px;
+  --radius-lg:18px;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.08);
+  --shadow:0 4px 12px rgba(15,23,42,.07),0 2px 6px rgba(15,23,42,.06);
+  --shadow-lg:0 10px 24px rgba(15,23,42,.08),0 4px 12px rgba(15,23,42,.06);
+  --shadow-xl:0 20px 40px rgba(15,23,42,.10);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background:
+    radial-gradient(900px 500px at 10% -10%, #dbeafe 0%, transparent 60%),
+    radial-gradient(800px 400px at 95% 0%, #e0e7ff 0%, transparent 60%),
+    radial-gradient(700px 400px at 50% 115%, #f0f9ff 0%, transparent 60%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+a{color:inherit; text-decoration:none}
+a:hover{color:var(--primary)}
+::selection{ background:#dbeafe; color:#1e3a8a }
+::-webkit-scrollbar{ width:9px; height:9px }
+::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:999px; border:2px solid #f8fafc }
+::-webkit-scrollbar-track{ background:#f1f5f9 }
+::-webkit-scrollbar-thumb:hover{ background:#94a3b8 }
+
+/* Focus ring */
+*:focus-visible{ outline:2px solid var(--primary-ring); outline-offset:2px; border-radius:6px }
+
+/* Card polish */
+.card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.card:hover{ transform: translateY(-1px); box-shadow:var(--shadow-lg); border-color:#cbd5e1 }
+
+/* Buttons */
+button{ font-family:inherit; transition: all .15s ease; }
+button:active{ transform: scale(.98); }
+button:disabled{ opacity:.6; cursor:not-allowed; transform:none !important; }
+
+/* Inputs */
+input, select, textarea{
+  font-family:inherit;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+input:hover, select:hover, textarea:hover{ border-color:var(--border-strong); }
+input:focus, select:focus, textarea:focus{
+  outline:none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-ring);
+  background:#fff;
+}
+input::placeholder, textarea::placeholder{ color:#94a3b8 }
+
+/* Tables */
+table{ border-collapse:separate; border-spacing:0 }
+thead th{ font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:11px; color:var(--text-muted); background:#f8fafc; position:sticky; top:0; z-index:1 }
+tbody tr{ transition: background .12s ease }
+tbody tr:hover{ background:#f8fafc }
+
+/* Badge */
+.badge{ display:inline-flex; align-items:center; gap:6px; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.02em; border:1px solid transparent }
+
+/* Page enter animation */
+@keyframes fadeInUp{ from{ opacity:0; transform: translateY(8px)} to{opacity:1; transform: translateY(0)} }
+@keyframes shimmer{ 0%{ background-position:-400px 0 } 100%{ background-position:400px 0 } }
+.page{ animation: fadeInUp .35s ease both }
+
+/* Navbar blur */
+nav{ backdrop-filter: saturate(1.2) blur(8px); -webkit-backdrop-filter: saturate(1.2) blur(8px); }
+
+/* Utility */
+.glass{ background: rgba(255,255,255,.82); backdrop-filter: blur(10px); border:1px solid rgba(226,232,240,.8) }
+.gradient-primary{ background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%) }
+.gradient-success{ background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) }
+.gradient-dark{ background: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #334155 100%) }
+.text-gradient{ background: linear-gradient(135deg, #2563eb, #7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text }
+
+/* Login page — image fills screen, card on right — 5px gap */
+.login-page{ justify-content:flex-end !important; }
+@media (max-width: 640px){
+  .login-page{ justify-content:center !important; padding:5px !important; }
+}
+
+/* Sidebar responsive — student/verifier/profile */
+@media (max-width: 960px){
+  .student-layout, .verifier-layout, .profile-layout{ flex-direction:column !important; height:auto !important; }
+  .sidebar{ width:100% !important; position:static !important; height:auto !important; max-height:none !important; }
+  .verifier-grid{ grid-template-columns:1fr !important; }
+}
+
+/* Cards fit within screen — balanced, not too large nor too small — 5px gap to screen */
+.page{ width:100%; }
+.card, [style*="borderRadius:16"]{ max-width:100%; }
+@media (max-width: 640px){
+  .page{ max-width:100% !important; padding-left:5px !important; padding-right:5px !important; }
+  .card{ padding:12px !important; border-radius:12px !important; }
+  h2{ font-size:17px !important; }
+  h3{ fontSize:15px !important; }
+}
+@media (min-width: 768px){
+  /* Ensure 2-col grids stay balanced on tablet/desktop */
+  div[style*="gridTemplateColumns: repeat(auto-fit"]{ gap:5px !important; }
+}
+@media (max-width: 640px){
+  div[style*="gridTemplateColumns: repeat(auto-fit"]{ grid-template-columns:1fr !important; }
+}
