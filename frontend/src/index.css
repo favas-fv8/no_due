@@ -129,3 +129,341 @@ nav{ backdrop-filter: saturate(1.2) blur(8px); -webkit-backdrop-filter: saturate
 @media (max-width: 640px){
   div[style*="gridTemplateColumns: repeat(auto-fit"]{ grid-template-columns:1fr !important; }
 }
+
+/* ===== COMPREHENSIVE RESPONSIVE STYLES ===== */
+
+/* Root layout - prevent overflow on all screens */
+html, body, #root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* App container - fix 100vh issues on mobile */
+div[style*="height: 100vh"] {
+  min-height: 100vh;
+  height: auto;
+}
+
+/* Navbar responsive */
+nav[style*="position:sticky"] {
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+}
+@media (max-width: 640px) {
+  nav[style*="position:sticky"] {
+    padding: 8px 10px;
+  }
+  nav[style*="position:sticky"] > a[style*="fontSize:18"] {
+    font-size: 16px !important;
+  }
+  nav[style*="position:sticky"] > a[style*="fontSize:18"] > span[style*="width:32"] {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Footer responsive */
+footer[style*="padding:"] {
+  padding: 12px 16px !important;
+}
+@media (max-width: 640px) {
+  footer[style*="padding:"] {
+    padding: 10px 12px !important;
+    font-size: 9px !important;
+  }
+  footer[style*="padding:"] div[style*="maxWidth:1300"] {
+    flex-direction: column;
+    gap: 16px !important;
+  }
+  footer[style*="padding:"] div[style*="display:flex"][style*="gap:16"] {
+    flex-direction: column;
+    gap: 12px !important;
+  }
+}
+
+/* Home page responsive */
+div[style*="maxWidth:1080"] {
+  padding: 8px !important;
+}
+@media (max-width: 640px) {
+  div[style*="maxWidth:1080"] {
+    padding: 5px !important;
+    margin: 0 !important;
+  }
+  div[style*="maxWidth:1080"] > section[style*="padding:"] {
+    padding: 14px !important;
+    border-radius: 12px !important;
+  }
+  div[style*="maxWidth:1080"] > section[style*="borderRadius:18"] {
+    padding: 20px 16px !important;
+    border-radius: 14px !important;
+  }
+  div[style*="maxWidth:1080"] h1[style*="fontSize:32"] {
+    font-size: 24px !important;
+  }
+  div[style*="maxWidth:1080"] div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Login card responsive */
+.login-page > div[style*="maxWidth:440"] {
+  max-width: 440px;
+  width: 100%;
+  margin: 0 5px;
+}
+@media (max-width: 480px) {
+  .login-page > div[style*="maxWidth:440"] {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0 !important;
+    min-height: 100vh;
+  }
+}
+
+/* Dashboard sidebar responsive */
+.sidebar[style*="width:260"] {
+  width: 260px;
+  min-width: 260px;
+}
+@media (max-width: 1024px) {
+  .sidebar[style*="width:260"] {
+    width: 220px;
+    min-width: 220px;
+  }
+}
+@media (max-width: 960px) {
+  .sidebar[style*="width:260"] {
+    width: 100%;
+    min-width: 0;
+    position: static !important;
+    height: auto !important;
+    max-height: none !important;
+    border-radius: 12px !important;
+  }
+}
+
+/* Main content area responsive */
+main[style*="flex: 1"] {
+  width: 100%;
+  min-width: 0;
+}
+@media (max-width: 640px) {
+  main[style*="flex: 1"] > div[style*="padding:"] {
+    padding: 5px !important;
+  }
+}
+
+/* Grid layouts responsive */
+div[style*="gridTemplateColumns: 360px 1fr"] {
+  grid-template-columns: 360px 1fr;
+}
+@media (max-width: 1024px) {
+  div[style*="gridTemplateColumns: 360px 1fr"] {
+    grid-template-columns: 320px 1fr;
+  }
+}
+@media (max-width: 960px) {
+  div[style*="gridTemplateColumns: 360px 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+div[style*="gridTemplateColumns: repeat(auto-fit,minmax(240px,1fr))"] {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+@media (max-width: 768px) {
+  div[style*="gridTemplateColumns: repeat(auto-fit,minmax(240px,1fr))"] {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  div[style*="gridTemplateColumns: repeat(auto-fit,minmax(240px,1fr))"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Student dashboard section cards */
+div[style*="gridTemplateColumns: 1fr"] > div[style*="minHeight:165"] {
+  min-height: auto !important;
+}
+@media (max-width: 640px) {
+  div[style*="minHeight:165"] {
+    min-height: auto !important;
+    padding: 12px !important;
+  }
+}
+
+/* File upload and button areas responsive */
+label[style*="Choose File"] {
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  label[style*="Choose File"] {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+  }
+  button[style*="Upload"], button[style*="Reupload"], button[style*="Send Request"] {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    width: 100%;
+    text-align: center;
+  }
+  div[style*="display:flex"][style*="gap:6"] > button {
+    flex: 1;
+  }
+}
+
+/* Form inputs responsive */
+input[style*="padding:11px"], select[style*="padding:11px"] {
+  padding: 11px 12px !important;
+}
+@media (max-width: 480px) {
+  input[style*="padding:11px"], select[style*="padding:11px"] {
+    padding: 10px 12px !important;
+    font-size: 16px !important; /* Prevent zoom on iOS */
+  }
+}
+
+/* Tables responsive - horizontal scroll on mobile */
+div[style*="overflowY:'auto'"] > table,
+div[style*="overflowX:'auto'"] > table {
+  min-width: 600px;
+}
+@media (max-width: 768px) {
+  div[style*="overflowY:'auto'"], div[style*="overflowX:'auto'"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Search/filter bars responsive */
+div[style*="display:flex"][style*="gap:6"][style*="flexWrap:wrap"] {
+  flex-wrap: wrap !important;
+}
+@media (max-width: 480px) {
+  div[style*="display:flex"][style*="gap:6"][style*="flexWrap:wrap"] > input,
+  div[style*="display:flex"][style*="gap:6"][style*="flexWrap:wrap"] > select,
+  div[style*="display:flex"][style*="gap:6"][style*="flexWrap:wrap"] > button {
+    flex: 1 1 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* Status badges and chips responsive */
+span[style*="borderRadius:999"][style*="padding:"] {
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  span[style*="borderRadius:999"][style*="padding:"] {
+    padding: 2px 6px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* Modal/Dialog responsive - ensure they fit on screen */
+div[style*="position:fixed"], div[style*="position: absolute"][style*="zIndex"] {
+  max-width: 95vw !important;
+  max-height: 95vh !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Profile page responsive */
+div[style*="maxWidth:900"] {
+  max-width: 900px;
+  width: 100%;
+}
+@media (max-width: 640px) {
+  div[style*="maxWidth:900"] {
+    padding: 5px !important;
+  }
+  div[style*="maxWidth:900"] > div[style*="padding:20"] {
+    padding: 14px !important;
+  }
+}
+
+/* Admin dashboard responsive */
+div[style*="maxWidth:1400"] {
+  max-width: 1400px;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  div[style*="maxWidth:1400"] {
+    padding: 8px !important;
+  }
+}
+@media (max-width: 768px) {
+  div[style*="maxWidth:1400"] div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Admin layout responsive */
+.admin-layout div[style*="gridTemplateColumns: 340px 1fr"] {
+  grid-template-columns: 340px 1fr;
+}
+@media (max-width: 1024px) {
+  .admin-layout div[style*="gridTemplateColumns: 340px 1fr"] {
+    grid-template-columns: 300px 1fr;
+  }
+}
+@media (max-width: 960px) {
+  .admin-layout div[style*="gridTemplateColumns: 340px 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Admin table responsive */
+.admin-layout table[style*="minWidth:720"] {
+  min-width: 720px;
+}
+@media (max-width: 768px) {
+  .admin-layout div[style*="maxHeight:580"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Profile layout responsive */
+.profile-layout div[style*="maxWidth: 580"], .profile-layout div[style*="maxWidth:640"] {
+  max-width: 640px;
+  width: 100%;
+}
+@media (max-width: 640px) {
+  .profile-layout div[style*="padding:18"] {
+    padding: 14px !important;
+  }
+  .profile-layout div[style*="display:'flex',flexDirection:'column',gap:8, flexWrap:'wrap'"] {
+    flex-direction: column !important;
+  }
+}
+
+/* Utility: prevent text overflow */
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Touch-friendly tap targets */
+@media (max-width: 640px) {
+  button, a[role="button"], label[style*="cursor:pointer"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Print styles for PDF generation */
+@media print {
+  nav, footer, .sidebar, button, input, select, textarea {
+    display: none !important;
+  }
+  main, .page, .card {
+    box-shadow: none !important;
+    border: none !important;
+    background: white !important;
+  }
+}

@@ -31,7 +31,7 @@ function Home(){
     'Once fully cleared, the student can generate and download the official, system-generated No-Due PDF certificate.',
   ]
   return (
-    <div className="page" style={{maxWidth:1080,margin:'5px auto',padding:'5px',flex:1,minHeight:0,display:'flex',flexDirection:'column',gap:5}}>
+    <div className="page home-page" style={{maxWidth:1080,margin:'5px auto',padding:'5px',flex:1,minHeight:0,display:'flex',flexDirection:'column',gap:5}}>
       <button onClick={()=> window.history.length>1 ? nav(-1) : nav('/login')} style={{alignSelf:'flex-start',background:'#fff',color:'#0f172a',border:'1px solid #e2e8f0',padding:'7px 13px',borderRadius:10,fontWeight:700,fontSize:13,cursor:'pointer',boxShadow:'0 4px 12px rgba(15,23,42,.08)',display:'inline-flex',alignItems:'center',gap:6}}>← Back</button>
       <section style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#4338ca 100%)',borderRadius:18,padding:'30px 22px',color:'#fff',position:'relative',overflow:'hidden',boxShadow:'0 16px 36px rgba(15,23,42,.18)',border:'1px solid rgba(255,255,255,.08)'}}>
         <div style={{position:'absolute',inset:0,background:'radial-gradient(600px 220px at 15% 0%, rgba(255,255,255,.14), transparent 60%), radial-gradient(500px 200px at 90% 20%, rgba(255,255,255,.10), transparent 60%)'}}/>
@@ -80,9 +80,9 @@ export default function App(){
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div style={{height:'100vh', display:'flex', flexDirection:'column', overflow:'hidden'}}>
+        <div className="app-root" style={{minHeight:'100vh', display:'flex', flexDirection:'column'}}>
           <Navbar/>
-          <main style={{flex:1, display:'flex', flexDirection:'column', minHeight:0, width:'100%', overflowY:'auto'}}>
+          <main className="main-content" style={{flex:1, display:'flex', flexDirection:'column', minHeight:0, width:'100%', overflowY:'auto'}}>
             <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/login" element={<Login/>}/>

@@ -130,7 +130,7 @@ export default function AdminDashboard(){
   )
 
   return (
-    <div className="page" style={{maxWidth:1200,margin:'5px auto',padding:'5px',flex:1,minHeight:0}}>
+    <div className="page admin-layout" style={{maxWidth:1200,margin:'5px auto',padding:'5px',flex:1,minHeight:0}}>
       <div style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#4338ca 100%)',borderRadius:16,padding:'12px 14px',color:'#fff',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:10,boxShadow:'0 10px 24px rgba(15,23,42,.18)',border:'1px solid rgba(255,255,255,.08)',marginBottom:5}}>
         <div>
           <h2 style={{margin:0,letterSpacing:-.02,display:'flex',alignItems:'center',gap:10}}><span style={{width:32,height:32,borderRadius:9,background:'rgba(255,255,255,.14)',border:'1px solid rgba(255,255,255,.18)',display:'grid',placeItems:'center'}}>⚙️</span> Admin Dashboard</h2>
