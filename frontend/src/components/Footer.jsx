@@ -14,7 +14,7 @@ export default function Footer(){
       <div style={{maxWidth:1300,margin:'0 auto',display:'flex',gap:14,flexWrap:'wrap',justifyContent:'space-between',alignItems:'flex-start'}}>
         <div style={{flex:'1 1 240px', minWidth:200}}>
           <div style={{display:'flex',alignItems:'center',gap:7, color:'#fff',fontWeight:800,letterSpacing:-.02, fontSize:12}}>
-            <span style={{width:22,height:22,borderRadius:6,background:'linear-gradient(135deg,#2563eb,#7c3aed)',display:'grid',placeItems:'center',fontSize:11}}>🎓</span>
+            <img src="/images/College-of-Engineering-Karunagappally logo.png" alt="CEK Logo" style={{width:22,height:22,borderRadius:6,objectFit:'contain',background:'#fff'}} />
             College of Engineering Karunagappally (IHRD)
           </div>
           <div style={{fontSize:10,marginTop:4,lineHeight:1.5,opacity:.85}}>

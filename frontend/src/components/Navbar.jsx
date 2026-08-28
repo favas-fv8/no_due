@@ -7,7 +7,7 @@ export default function Navbar(){
   return (
     <nav style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'12px 5px',background:'linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #1e3a5f 100%)',color:'#fff',position:'sticky',top:0,zIndex:20,boxShadow:'0 6px 20px rgba(15,23,42,.18)',borderBottom:'1px solid rgba(255,255,255,.08)'}}>
       <Link to="/" style={{color:'#fff',textDecoration:'none',fontWeight:800,fontSize:18,letterSpacing:-.02,display:'flex',alignItems:'center',gap:9}}>
-        <span style={{width:32,height:32,borderRadius:9,display:'grid',placeItems:'center',background:'linear-gradient(135deg,#2563eb,#7c3aed)',boxShadow:'0 6px 14px rgba(37,99,235,.35)',fontSize:14}}>✓</span>
+        <img src="/images/College-of-Engineering-Karunagappally logo.png" alt="CEK Logo" style={{width:32,height:32,borderRadius:9,objectFit:'contain',background:'#fff'}} />
         No-Due <span style={{fontWeight:600,opacity:.92}}>Portal</span>
         <span style={{fontSize:10,background:'rgba(255,255,255,.12)',border:'1px solid rgba(255,255,255,.14)',padding:'2px 7px',borderRadius:999,marginLeft:4,letterSpacing:.04}}>CEK • IHRD</span>
       </Link>

@@ -52,16 +52,13 @@ export default function Login(){
         <div style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a8a 45%,#4f46e5 100%)',padding:'22px 22px 18px',color:'#fff',position:'relative',overflow:'hidden'}}>
           <div style={{position:'absolute',inset:0,background:'radial-gradient(300px 120px at 20% 0%, rgba(255,255,255,.14), transparent 60%)'}}/>
           <div style={{position:'relative'}}>
-            <div style={{width:42,height:42,borderRadius:11,background:'rgba(255,255,255,.14)',border:'1px solid rgba(255,255,255,.18)',display:'grid',placeItems:'center',fontSize:18,boxShadow:'0 8px 20px rgba(0,0,0,.18)'}}>🎓</div>
+            <img src="/images/College-of-Engineering-Karunagappally logo.png" alt="CEK Logo" style={{width:42,height:42,borderRadius:11,background:'#fff',objectFit:'contain',boxShadow:'0 8px 20px rgba(0,0,0,.18)'}} />
             <h2 style={{margin:'10px 0 0',fontSize:20,letterSpacing:-.02,lineHeight:1.1}}>No-Due Portal</h2>
             <p style={{margin:'4px 0 0',fontSize:13,opacity:.85,fontWeight:500}}>Sign in with your role • CEK IHRD</p>
           </div>
         </div>
         <div style={{padding:20, background:'linear-gradient(180deg, rgba(255,255,255,.98), #fff)'}}>
           <p style={{textAlign:'center',fontSize:13,color:'#475569',margin:0,lineHeight:1.5}}>Select your role and enter credentials given by Admin</p>
-          <div style={{background:'linear-gradient(180deg,#f8fafc,#fff)',border:'1px dashed #cbd5e1',padding:10,borderRadius:10,fontSize:11.5,color:'#334155',marginTop:12,lineHeight:1.5}}>
-            <b style={{color:'#0f172a'}}>Demo</b> <span style={{color:'#64748b'}}>—</span> <code style={{background:'#fff',border:'1px solid #e2e8f0',padding:'2px 6px',borderRadius:6}}>admin/admin123</code> • <code style={{background:'#fff',border:'1px solid #e2e8f0',padding:'2px 6px',borderRadius:6}}>stu1/pass123</code> • <code style={{background:'#fff',border:'1px solid #e2e8f0',padding:'2px 6px',borderRadius:6}}>ver_lab</code> • <code style={{background:'#fff',border:'1px solid #e2e8f0',padding:'2px 6px',borderRadius:6}}>advisor1</code> • <code style={{background:'#fff',border:'1px solid #e2e8f0',padding:'2px 6px',borderRadius:6}}>hod_cs</code>
-          </div>
           <form onSubmit={submit} style={{display:'flex',flexDirection:'column',gap:12,marginTop:16}}>
             <select value={role} onChange={e=>setRole(e.target.value)} style={{...inp, cursor:'pointer', background:'#fff'}} required>
               {ROLES.map(r=> <option key={r.value} value={r.value}>{r.label}</option>)}
