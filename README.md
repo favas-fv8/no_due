@@ -1,123 +1,121 @@
-# No-Due Portal — React + Django + SQLite
+# No-Due Portal — Role-Based Student Clearance Workflow
 
-Clean modular architecture with role-based auth, 11-section sequential workflow, file uploads, and audit history.
+A full-stack college clearance platform built with Django REST Framework and React. The system guides students through an 11-section no-due workflow and routes verification requests to the appropriate institutional roles.
 
-## Stack
-- **Backend**: Django 6 + Django REST Framework + SimpleJWT + SQLite3 + Pillow
-- **Frontend**: React (Vite) + react-router-dom + axios
-- **DB**: SQLite (`db.sqlite3`), media in `media/uploads/`
+## Core Capabilities
 
-## Roles
-- `ADMIN` | `STUDENT` | `VERIFIER` | `STAFF_ADVISOR` | `HOD` | `PRINCIPAL`
-- JWT auth (access 12h, refresh 7d). Passwords hashed via Django.
+- JWT-based authentication
+- Role-based access for `ADMIN`, `STUDENT`, `VERIFIER`, `STAFF_ADVISOR`, `HOD`, and `PRINCIPAL`
+- Student profile management
+- Sequential 11-section clearance workflow
+- Role-aware verification inboxes
+- Approve/reject actions with remarks and timestamps
+- Automatic request routing by department, division, semester, and verifier type
+- File uploads with section-specific validation
+- Audit history for submissions and verification activity
+- Administrative user, submission, request, and verification-type management
 
-## Environment & Secrets
-All secrets and environment-specific values are externalized to `.env` files (git-ignored).
-- `backend/.env` — Django `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS`, `CORS_ALLOW_ALL_ORIGINS` (template: `backend/.env.example`).
-- `frontend/.env` — `VITE_API_BASE_URL` (template: `frontend/.env.example`).
+## Clearance Workflow
 
-Python dependencies are managed inside `backend/.venv`. See [`docs/SETUP.md`](docs/SETUP.md) for full instructions
-and [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the project layout.
+1. Office — PDF
+2. Placement — image
+3. PTA — image
+4. Bus / Bus Maintenance — image
+5. Lab — verification request
+6. Hostel — up to 5 images for hostellers; not required for day scholars
+7. Library — verification request
+8. Staff Advisor — enabled after sections 1–7 are approved
+9. HOD — enabled after sections 1–8 are approved
+10. Principal — enabled after sections 1–9 are approved
+11. Final status — approved only when all required sections are approved
 
-## Project Structure (reorganized, functions unchanged)
-```
+Sequential enforcement is implemented in `submissions/utils.py`, with `find_assignee()` handling automatic routing.
+
+## Tech Stack
+
+- **Backend:** Django 6, Django REST Framework, SimpleJWT, Pillow
+- **Frontend:** React, Vite, React Router, Axios
+- **Database:** SQLite for the current repository setup
+- **Security:** JWT authentication, Django password hashing, environment-based configuration, upload validation
+
+## Project Structure
+
+```text
 no_due/
-├── backend/               # Django + SQLite
-│   ├── config/            # settings, urls, wsgi
-│   ├── accounts/          # User, profiles, auth, admin APIs
-│   ├── submissions/       # 11-section workflow, uploads, audit
-│   ├── verification/      # inbox + approve/reject
+├── backend/
+│   ├── config/            # Settings, URLs and WSGI configuration
+│   ├── accounts/          # Users, profiles, authentication and admin APIs
+│   ├── submissions/       # 11-section workflow, uploads and audit logs
+│   ├── verification/      # Verification inbox and approve/reject actions
 │   ├── manage.py
-│   ├── db.sqlite3
-│   ├── media/uploads/     # uploaded files
 │   └── requirements.txt
-├── frontend/              # React (Vite)
-├── manage.py              # shim → backend/manage.py
-└── requirements.txt       # shim → backend/requirements.txt
+├── frontend/              # React + Vite application
+├── docs/                  # Setup and architecture documentation
+├── manage.py              # Root management shim
+└── requirements.txt       # Root dependency shim
 ```
 
-## Setup
+## Local Setup
 
 ### Backend
+
 ```bash
 cd backend
 python -m venv .venv
-# Windows :  .venv\Scripts\activate
+# Windows: .venv\\Scripts\\activate
 # macOS/Linux: source .venv/bin/activate
-pip install -r requirements.txt   # Django, djangorestframework, django-cors-headers, Pillow, djangorestframework-simplejwt, python-decouple
-cp .env.example .env             # then set a strong SECRET_KEY in .env
+pip install -r requirements.txt
+cp .env.example .env
 python manage.py migrate
-python manage.py shell -c "from django.contrib.auth import get_user_model; User=get_user_model(); User.objects.create_superuser('admin','admin@example.com','admin123',role='ADMIN') if not User.objects.filter(username='admin').exists() else print('exists')"
 python manage.py runserver
-# http://127.0.0.1:8000/api/
-# Admin seeded: admin / admin123
-# Also works from root: python manage.py runserver (shim)
 ```
 
 ### Frontend
+
 ```bash
 cd frontend
 npm install
-npm run dev   # http://127.0.0.1:5173  (proxies /api + /media to Django)
-npm run build # production
+npm run dev
 ```
 
-## Database Models
-- **accounts.User** (AbstractUser) + `role`
-- **StudentProfile**, **VerifierProfile**, **StaffAdvisorProfile**, **HODProfile**, **PrincipalProfile**
-- **VerificationType** (manageable by admin)
-- **submissions.Submission** (OneToOne Student), **SectionStatus** (11 rows per student), **UploadedFile**, **VerificationRequest**, **AuditLog**
+Production frontend builds can be generated with:
 
-## Verification Workflow (11 sections)
-1 Office (PDF) → file → verifier `Office`
-2 Placement (image) → `Placement`
-3 PTA (image) → `PTA`
-4 Bus (image) → `Bus Maintenance`
-5 Lab (request) → `Lab` verifier
-6 Hostel (≤5 images, hosteller only, `NOT_REQUIRED` for day scholars)
-7 Library (request) → `Library`
-8 Staff Advisor (request, auto-matched by dept/div/sem) — enabled after 1-7 approved
-9 HOD (request, auto-matched by dept) — after 1-8 approved
-10 Principal (request → Principal) — after 1-9 approved
-11 Final Status = APPROVED only if all required sections APPROVED
+```bash
+npm run build
+```
 
-Sequential enforcement in `submissions/utils.py:can_send_request`. `find_assignee()` auto-routes requests.
+See `docs/SETUP.md` and `docs/ARCHITECTURE.md` for repository-specific setup and architecture guidance.
 
-## REST API
-- `POST /api/auth/login/` `{username,password}` → `{access,refresh,user,profile_complete}`
-- `POST /api/auth/refresh/` `{refresh}`
-- `GET  /api/auth/me/` (auth)
-- `GET/POST/PUT /api/profile/` (auth) — role-specific fields, validates completeness
-- `GET  /api/submissions/my/` (student)
-- `POST /api/submissions/upload/<SECTION>/` (file, validates PDF vs image, 10MB, hostel ≤5)
-- `POST /api/submissions/request/<SECTION>/` (sequential check + auto-assign)
-- `GET  /api/submissions/audit/` + `GET /api/submissions/admin/list/` + `/<id>/` (admin)
-- `GET  /api/verification/inbox/?status=PENDING` (verifier-scoped)
-- `GET  /api/verification/request/<id>/` + `POST /api/verification/request/<id>/action/` `{action:APPROVE|REJECT, remark}`
-- `GET  /api/verification/admin/all/` (admin)
-- `GET/POST /api/verification-types/` + `GET /api/admin/users/` `POST /api/admin/users/` `PUT /api/admin/users/<id>/` `POST /api/admin/users/<id>/reset-password/` (admin)
+## API Overview
 
-Media served at `/media/<path>` in DEBUG.
+```text
+POST /api/auth/login/
+POST /api/auth/refresh/
+GET  /api/auth/me/
+GET/POST/PUT /api/profile/
+GET  /api/submissions/my/
+POST /api/submissions/upload/<SECTION>/
+POST /api/submissions/request/<SECTION>/
+GET  /api/submissions/audit/
+GET  /api/verification/inbox/
+GET  /api/verification/request/<id>/
+POST /api/verification/request/<id>/action/
+```
 
 ## File Upload Security
-- `FILE_UPLOAD_MAX_MEMORY_SIZE=10MB`, content-type + extension check, per-section rules, `media/uploads/%Y/%m/%d/`, original name + size stored.
 
-## Frontend Routes
-- `/` home, `/login`, `/profile` (forced if incomplete), `/student` (student 11 cards + progress tracker + audit), `/verifier` (inbox split pane + approve/reject), `/admin` (users/submissions/requests/verifier-types tabs). Navbar + ProtectedRoute + JWT refresh interceptor.
+The application applies a 10 MB upload limit, extension/content-type validation, section-specific rules, and dated upload paths. Supported document/image requirements vary by clearance section.
 
-## Creating Users
-Login as `admin` → Admin dashboard → Create User (choose role) → user logs in → completes profile → proceeds.
+## Configuration & Security Notes
 
-## Test Accounts (seeded for demo)
-- `stu1` / `pass123` (Student CS/A/4 hosteller)
-- `ver_off` / `pass123` (Office verifier CS)
-- `ver_lab` / `pass123` (Lab A/4/CS)
-- `ver_lib` / `pass123` (Library)
-- `advisor1` / `pass123` (Staff Advisor CS/A/4)
-- `hod_cs` / `pass123` (HOD CS)
-- `principal` / `pass123` (Principal)
+Environment-specific values are expected in `.env` files that are excluded from version control. Do not commit production secrets, real user credentials, or private uploaded files.
 
-## Notes
-- Vite proxy in `frontend/vite.config.js` — no CORS needed in dev.
-- `backend/config/settings.py` has `CORS_ALLOW_ALL_ORIGINS=True` for flexibility.
-- All sections show `Pending/Approved/Rejected/Not Required` with remark + timestamp + audit log.
+For production deployment, review `DEBUG`, CORS, allowed hosts, secret-key configuration, database configuration, and media storage before exposing the service publicly.
+
+## Project Status
+
+The repository contains the backend, frontend, workflow logic, documentation, and role-specific interfaces needed for the current clearance workflow. Production hardening and deployment configuration should be completed separately for the target institution.
+
+## License
+
+No license file is currently defined in the repository. Please contact the repository owner for reuse or licensing questions.
