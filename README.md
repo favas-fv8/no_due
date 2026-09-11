@@ -2,6 +2,76 @@
 
 A full-stack college clearance platform built with Django REST Framework and React. The system guides students through an 11-section no-due workflow and routes verification requests to the appropriate institutional roles.
 
+## Screenshots
+
+### Landing & Login
+![Landing page](captures/screenshots/01_landing_page_full.png)
+*Landing page*
+
+![Login page](captures/screenshots/02_login_page_default.png)
+*Login page*
+
+### Student
+![Student dashboard showing pending sections](captures/screenshots/05_student_pending_dashboard.png)
+*Student dashboard — pending sections*
+
+![Office PDF upload](captures/screenshots/06_student_office_pdf_upload.png)
+*Office PDF upload*
+
+![Hostel upload with multiple images](captures/screenshots/07_student_hostel_multi_image.png)
+*Hostel multi-image upload*
+
+![Approved dashboard](captures/screenshots/09_student_approved_dashboard.png)
+*All sections approved*
+
+![Final status card](captures/screenshots/10_student_final_status_card.png)
+*Final status card*
+
+![Student audit history](captures/screenshots/11_student_audit_history.png)
+*Audit history*
+
+![No-Due certificate preview](captures/screenshots/12_no_due_certificate_pdf_preview.png)
+*No-Due certificate preview*
+
+### Verifier
+![Verifier office inbox](captures/screenshots/16_verifier_office_inbox.png)
+*Verifier inbox (Office)*
+
+![Verifier request detail](captures/screenshots/17_verifier_request_detail.png)
+*Request detail with approve / reject*
+
+### Staff / HOD / Principal
+![Staff Advisor dashboard](captures/screenshots/20_staff_advisor_dashboard.png)
+*Staff Advisor dashboard*
+![HOD dashboard](captures/screenshots/21_hod_dashboard.png)
+*HOD dashboard*
+![Principal dashboard](captures/screenshots/22_principal_dashboard.png)
+*Principal dashboard*
+
+### Admin
+![Admin dashboard](captures/screenshots/23_admin_dashboard_full.png)
+*Admin dashboard*
+
+![Admin role filters](captures/screenshots/25_admin_role_filters.png)
+*Admin role filters*
+
+### Mobile
+![Mobile landing](captures/screenshots/26_mobile_landing.png)
+*Responsive landing*
+
+![Mobile student dashboard](captures/screenshots/28_mobile_student_dashboard.png)
+*Mobile student dashboard*
+
+## Demo / Video
+
+GitHub does not render `.webm` inline, so the screen recordings are provided as repository-relative links:
+
+- [video_01_complete_ui_tour.webm](captures/recordings/video_01_complete_ui_tour.webm) — complete UI tour
+- [video_02_student_experience.webm](captures/recordings/video_02_student_experience.webm) — student experience
+- [video_03_verifier_review_workflow.webm](captures/recordings/video_03_verifier_review_workflow.webm) — verifier review workflow
+- [video_04_admin_user_management.webm](captures/recordings/video_04_admin_user_management.webm) — admin user management
+- [video_05_clearance_and_certificate_download.webm](captures/recordings/video_05_clearance_and_certificate_download.webm) — clearance & certificate download
+
 ## Core Capabilities
 
 - JWT-based authentication
